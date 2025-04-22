@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evento Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background-color: #ecfdf5;
+        position: relative;
+        overflow-x: hidden;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+          linear-gradient(90deg, transparent 95%, #047857 95%),
+          linear-gradient(transparent 95%, #047857 95%);
+        background-size: 30px 30px;
+        opacity: 0.1;
+        z-index: -1;
+      }
+      .accent-shape {
+        position: fixed;
+        background: #10b981;
+        border: 3px solid black;
+        z-index: -1;
+      }
+      .accent-shape:nth-child(1) {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        top: 10%;
+        right: -30px;
+        box-shadow: 8px 8px 0 rgba(0,0,0,0.9);
+      }
+      .accent-shape:nth-child(2) {
+        width: 200px;
+        height: 200px;
+        bottom: -50px;
+        left: -50px;
+        transform: rotate(45deg);
+        box-shadow: 6px 6px 0 rgba(0,0,0,0.9);
+      }
+      .mono { font-family: 'Space Mono', monospace; }
+      .neu-brutal {
+        box-shadow: 6px 6px 0px black;
+        border: 2px solid black;
+        transition: all 0.2s ease;
+        background: rgba(255, 255, 255, 0.95);
+      }
+      .neu-brutal:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 8px 8px 0px black;
+      }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+      }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="accent-shape"></div>
+    <div class="accent-shape"></div>
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-4xl font-black tracking-wider text-green-900 mono">EVENTO<span class="text-green-600">_</span></h1>
+                <p class="text-green-800">Welcome back, Admin</p>
+            </div>
+            <button onclick="logout()" class="bg-green-600 text-white px-6 py-3 neu-brutal mono hover:bg-green-700 text-lg font-bold tracking-wider">
+                LOGOUT <span class="font-mono">→</span>
+            </button>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg neu-brutal card-hover">
+                <h3 class="text-xl font-bold mb-2 mono">Total Events</h3>
+                <p class="text-4xl font-black text-green-600">24</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg neu-brutal card-hover">
+                <h3 class="text-xl font-bold mb-2 mono">Active Societies</h3>
+                <p class="text-4xl font-black text-green-600">12</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg neu-brutal card-hover">
+                <h3 class="text-xl font-bold mb-2 mono">Upcoming Events</h3>
+                <p class="text-4xl font-black text-green-600">8</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Upcoming Events -->
+            <div class="bg-white p-6 rounded-lg neu-brutal">
+                <h2 class="text-2xl font-bold mb-4 mono">Upcoming Events</h2>
+                <div class="space-y-4">
+                    <div class="border-2 border-black p-4 hover:bg-green-50 transition-colors">
+                        <h3 class="font-bold">Tech Fest 2025</h3>
+                        <p class="text-gray-600 mono">Apr 25, 2025 • Computer Society</p>
+                    </div>
+                    <div class="border-2 border-black p-4 hover:bg-green-50 transition-colors">
+                        <h3 class="font-bold">Cultural Night</h3>
+                        <p class="text-gray-600 mono">Apr 30, 2025 • Arts Society</p>
+                    </div>
+                    <div class="border-2 border-black p-4 hover:bg-green-50 transition-colors">
+                        <h3 class="font-bold">Debate Competition</h3>
+                        <p class="text-gray-600 mono">May 5, 2025 • Literary Society</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Society Updates -->
+            <div class="bg-white p-6 rounded-lg neu-brutal">
+                <h2 class="text-2xl font-bold mb-4 mono">Society Updates</h2>
+                <div class="space-y-4">
+                    <div class="border-2 border-black p-4 hover:bg-green-50 transition-colors">
+                        <h3 class="font-bold">Computer Society</h3>
+                        <p class="text-gray-600">New workshop series announced</p>
+                        <span class="text-xs text-green-600 mono">2 hours ago</span>
+                    </div>
+                    <div class="border-2 border-black p-4 hover:bg-green-50 transition-colors">
+                        <h3 class="font-bold">Photography Club</h3>
+                        <p class="text-gray-600">Exhibition preparations started</p>
+                        <span class="text-xs text-green-600 mono">5 hours ago</span>
+                    </div>
+                    <div class="border-2 border-black p-4 hover:bg-green-50 transition-colors">
+                        <h3 class="font-bold">Sports Society</h3>
+                        <p class="text-gray-600">Inter-college tournament registration open</p>
+                        <span class="text-xs text-green-600 mono">1 day ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            // Add logout logic here
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
