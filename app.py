@@ -33,6 +33,16 @@ def home_page():
     else:
         return redirect(url_for('login'))
 
+@app.route('/admin', methods=['POST', 'GET'])
+def admin_page():
+    if "admin_username" in session:
+        return render_template('admin_dashboard.html', session=session)
+    else:
+        if "username" in session:
+            return redirect(url_for('home_page'))
+        else:
+            return redirect(url_for('login', message="You are not authorized to access this page."))
+
 @nocache
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -42,9 +52,21 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        # Check if the user exists or not
-        check_query = text("SELECT * FROM user WHERE BINARY username = :username AND password = :password")
+
         with engine.connect() as connection:
+            #Check if the user is an admin or not
+            check_admin_query = text("SELECT * FROM admin WHERE BINARY admin_name = :admin_name AND admin_password = :admin_password")
+            check_admin_result = connection.execute(check_admin_query, {
+                "admin_name": username,
+                "admin_password": password
+                }).fetchone()
+            if check_admin_result is not None:
+                session['admin_id'] = check_admin_result[0]
+                session['admin_username'] = username
+                session['admin_password'] = password
+                return redirect(url_for('admin_page'))
+            # Check if the user exists or not
+            check_query = text("SELECT * FROM user WHERE BINARY username = :username AND password = :password")
             check_result = connection.execute(check_query, {
                 "username": username,
                 "password": password
@@ -57,7 +79,12 @@ def login():
             else:
                 # User does not exist
                 return render_template('login_page.html', error="Invalid credentials. Please try again.")
-    return render_template('login_page.html')
+    
+    message = request.args.get('message')
+    if message:
+        return render_template('login_page.html', error=message)
+    else:
+        return render_template('login_page.html')
 
 @nocache
 @app.route('/register', methods=['POST', 'GET'])
