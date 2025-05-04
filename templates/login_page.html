@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Evento - College Society Management</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background-color: #1e1e1e;
+        position: relative;
+        overflow-x: hidden;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+          linear-gradient(90deg, transparent 95%, #047857 95%),
+          linear-gradient(transparent 95%, #047857 95%);
+        background-size: 30px 30px;
+        opacity: 0.1;
+        z-index: -1;
+      }
+      .accent-shape {
+        position: fixed;
+        background: #10b981;
+        border: 3px solid black;
+        z-index: -1;
+      }
+      .accent-shape:nth-child(1) {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        top: 10%;
+        right: -30px;
+        box-shadow: 8px 8px 0 rgba(0,0,0,0.9);
+      }
+      .accent-shape:nth-child(2) {
+        width: 200px;
+        height: 200px;
+        bottom: -50px;
+        left: -50px;
+        transform: rotate(45deg);
+        box-shadow: 6px 6px 0 rgba(0,0,0,0.9);
+      }
+      .mono { font-family: 'Space Mono', monospace; }
+      .neu-brutal {
+        box-shadow: 6px 6px 0px black;
+        border: 2px solid black;
+        transition: all 0.2s ease;
+        background: rgba(255, 255, 255, 0.95);
+      }
+      .neu-brutal:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 8px 8px 0px black;
+      }
+      .form-control {
+        background: white;
+        border: 2px solid black;
+        padding: 0.75rem;
+        width: 100%;
+        margin-bottom: 1rem;
+        font-family: 'Space Mono', monospace;
+      }
+      .form-control:focus {
+        outline: none;
+        border-color: #10b981;
+      }
+      .neu-brutal-sm {
+        box-shadow: 4px 4px 0px black;
+        border: 2px solid black;
+        transition: all 0.2s ease;
+      }
+      .btn-hover:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 8px 8px 0px black;
+      }
+      .input-focus:focus {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0px black;
+        outline: none;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes letterSpacing {
+        0% { letter-spacing: normal; }
+        50% { letter-spacing: 0.3em; }
+        100% { letter-spacing: normal; }
+      }
+      .evento-title {
+        font-family: 'Outfit', sans-serif;
+        animation: letterSpacing 3s ease-in-out infinite;
+      }
+      .fade-in {
+        animation: fadeIn 0.5s ease-out;
+      }
+      .fade-in-delay-200 {
+        animation: fadeIn 0.5s ease-out;
+        animation-delay: 0.2s;
+      }
+      .fade-in-delay-400 {
+        animation: fadeIn 0.5s ease-out;
+        animation-delay: 0.4s;
+      }
+      .spinner {
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex items-center justify-center">
+    <div class="accent-shape"></div>
+    <div class="accent-shape"></div>
+    <div class="flex flex-col items-center justify-center min-h-screen p-4">
+      <!-- Logo Section -->
+      <div class="mb-8 text-center fade-in">
+        <h1 class="evento-title text-6xl font-black tracking-wider text-green-400 mb-3">EVENTO</h1>
+        <p class="text-lg text-green-500 font-medium tracking-wide">College Society Event Management System</p>
+      </div>
+
+      <!-- Error Card -->
+      {% if error %}
+        <div class="bg-white p-8 rounded-lg neu-brutal max-w-md w-full fade-in fade-in-delay-200">
+        <h2 class="text-2xl font-black text-red-600 mb-6 tracking-wide">ERROR</h2>
+        <p class="text-lg text-black font-medium mb-4">
+            {{ error }}
+        </p>
+        </div>
+      {% endif %}
+
+      <!-- Login Card -->
+      <div class="bg-white p-8 rounded-lg neu-brutal max-w-md w-full fade-in fade-in-delay-200">
+        <h2 class="text-2xl font-black text-black mb-6 tracking-wide">LOGIN</h2>
+        <form id="loginForm" method="POST" class="space-y-4">
+          <div>
+            <label class="block text-black font-bold mb-2 tracking-wide">USERNAME</label>
+            <input 
+              type="text" 
+              id="username"
+              name="username"
+              placeholder="Enter your username"
+              title="Username input field"
+              class="w-full border-2 border-black px-4 py-3 neu-brutal-sm input-focus bg-white text-black rounded-none" 
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-black font-bold mb-2 tracking-wide">PASSWORD</label>
+            <input 
+              type="password" 
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              title="Password input field"
+              class="w-full border-2 border-black px-4 py-3 neu-brutal-sm input-focus bg-white text-black rounded-none" 
+              required
+            />
+          </div>
+          <div class="pt-4">
+            <input 
+            type="submit"
+            id="loginButton"
+            value="Login"
+            class="w-full bg-green-500 text-white font-bold px-6 py-3 neu-brutal-sm btn-hover hover:bg-green-600 flex items-center justify-center space-x-2 cursor-pointer"
+            >
+          </div>
+          <div class="text-center mt-4">
+            <a href="/register" class="text-green-800 hover:text-green-600 font-medium transition-colors duration-200 hover:underline">Haven't Registered yet?</a>
+          </div>
+        </form>
+      </div>
+
+      <!-- Footer -->
+      <div class="mt-8 text-center text-green-500 fade-in fade-in-delay-400">
+        <p class="font-medium">&copy; 2025 Evento. All rights reserved.</p>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const button = document.getElementById('loginButton');
+        const spinner = document.getElementById('spinner');
+        
+        // Show loading state
+        button.disabled = true;
+        spinner.classList.remove('hidden');
+        button.querySelector('span').textContent = 'Signing In...';
+        
+        try {
+          // Simulate API call
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          
+          // Here you'll add your authentication logic
+          console.log('Login attempted:', { username, password });
+          
+          // Redirect to dashboard
+          window.location.href = 'dashboard.html';
+        } catch (error) {
+          console.error('Login failed:', error);
+          button.disabled = false;
+          spinner.classList.add('hidden');
+          button.querySelector('span').textContent = 'Sign In';
+        }
+      });
+
+      // Add subtle hover effect to input fields
+      document.querySelectorAll('input').forEach(input => {
+        input.addEventListener('focus', () => {
+          input.classList.add('scale-[1.01]');
+        });
+        input.addEventListener('blur', () => {
+          input.classList.remove('scale-[1.01]');
+        });
+      });
+    </script>
+  </body>
+</html>
