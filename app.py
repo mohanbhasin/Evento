@@ -28,7 +28,7 @@ def nocache(view):
 @nocache
 @app.route('/')
 def home_page():
-    if "username" in session:
+    if "username" in session or "admin_username" in session:
         return render_template('dashboard.html', session=session)
     else:
         return redirect(url_for('login'))
