@@ -108,43 +108,45 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <!-- Event Creation Form -->
-            <div class="bg-white p-6 rounded-lg neu-brutal">
-                <h2 class="text-2xl font-bold mb-6 mono">Create New Event</h2>
-                <form id="eventForm" class="space-y-4">
-                    <div>
-                        <label for="eventTitle" class="block mb-2 font-bold mono">Event Title</label>
-                        <input type="text" name="eventTitle" id="eventTitle" class="input-brutal" required placeholder="Enter event title">
-                    </div>
-                    <div>
-                        <label for="society" class="block mb-2 font-bold mono">Society</label>
-                        <select name="society" id="society" class="input-brutal" required title="Select a society">
-                            <option value="">Select Society</option>
-                            <option value="computer">Computer Society</option>
-                            <option value="arts">Arts Society</option>
-                            <option value="sports">Sports Society</option>
-                            <option value="literary">Literary Society</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="eventDateTime" class="block mb-2 font-bold mono">Date & Time</label>
-                        <input type="datetime-local" name="eventDateTime" id="eventDateTime" class="input-brutal" required title="Select event date and time">
-                    </div>
-                    <div>
-                        <label for="venue" class="block mb-2 font-bold mono">Venue</label>
-                        <input type="text" name="venue" id="venue" class="input-brutal" required placeholder="Enter event venue">
-                    </div>
-                    <div>
-                        <label for="description" class="block mb-2 font-bold mono">Description</label>
-                        <textarea name="description" id="description" class="input-brutal h-32" required placeholder="Enter event description"></textarea>
-                    </div>
-                    <div>
-                        <label for="eventBanner" class="block mb-2 font-bold mono">Event Banner</label>
-                        <input type="file" name="eventBanner" id="eventBanner" accept="image/*" class="input-brutal" required title="Upload event banner image">
-                    </div>
-                    <button type="submit" class="btn-brutal mono font-bold tracking-wider w-full">
-                        PUBLISH EVENT
-                    </button>
-                </form>
+            <div id="mainContent">
+                <div class="bg-white p-6 rounded-lg neu-brutal">
+                    <h2 class="text-2xl font-bold mb-6 mono">Create New Event</h2>
+                    <form id="eventForm" class="space-y-4">
+                        <div>
+                            <label for="eventTitle" class="block mb-2 font-bold mono">Event Title</label>
+                            <input type="text" name="eventTitle" id="eventTitle" class="input-brutal" required placeholder="Enter event title">
+                        </div>
+                        <div>
+                            <label for="society" class="block mb-2 font-bold mono">Society</label>
+                            <select name="society" id="society" class="input-brutal" required title="Select a society">
+                                <option value="">Select Society</option>
+                                <option value="computer">Computer Society</option>
+                                <option value="arts">Arts Society</option>
+                                <option value="sports">Sports Society</option>
+                                <option value="literary">Literary Society</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="eventDateTime" class="block mb-2 font-bold mono">Date & Time</label>
+                            <input type="datetime-local" name="eventDateTime" id="eventDateTime" class="input-brutal" required title="Select event date and time">
+                        </div>
+                        <div>
+                            <label for="venue" class="block mb-2 font-bold mono">Venue</label>
+                            <input type="text" name="venue" id="venue" class="input-brutal" required placeholder="Enter event venue">
+                        </div>
+                        <div>
+                            <label for="description" class="block mb-2 font-bold mono">Description</label>
+                            <textarea name="description" id="description" class="input-brutal h-32" required placeholder="Enter event description"></textarea>
+                        </div>
+                        <div>
+                            <label for="eventBanner" class="block mb-2 font-bold mono">Event Banner</label>
+                            <input type="file" name="eventBanner" id="eventBanner" accept="image/*" class="input-brutal" required title="Upload event banner image">
+                        </div>
+                        <button type="submit" class="btn-brutal mono font-bold tracking-wider w-full">
+                            PUBLISH EVENT
+                        </button>
+                    </form>
+                </div>
             </div>
 
             <!-- Event Management -->
@@ -152,8 +154,8 @@
                 <!-- Quick Actions -->
                 <div class="bg-white p-6 rounded-lg neu-brutal">
                     <h2 class="text-2xl font-bold mb-4 mono">Quick Actions</h2>
-                    <div class="grid grid-cols-2 gap-4">
-                        <button class="btn-brutal mono font-bold">MANAGE SOCIETIES</button>
+                    <div class="grid grid-cols-2 gap-4" id="quickActions">
+                        <button onclick="useblock2()"class="btn-brutal mono font-bold">MANAGE SOCIETIES</button>
                         <button class="btn-brutal mono font-bold">VIEW ANALYTICS</button>
                     </div>
                 </div>
@@ -202,6 +204,99 @@
         function logout() {
             // Add logout logic here
             window.location.href = 'index.html';
+        }
+
+        const eventCreation = `
+             <div class="bg-white p-6 rounded-lg neu-brutal">
+                <h2 class="text-2xl font-bold mb-6 mono">Create New Event</h2>
+                <form id="eventForm" class="space-y-4">
+                    <div>
+                        <label for="eventTitle" class="block mb-2 font-bold mono">Event Title</label>
+                        <input type="text" name="eventTitle" id="eventTitle" class="input-brutal" required placeholder="Enter event title">
+                    </div>
+                    <div>
+                        <label for="society" class="block mb-2 font-bold mono">Society</label>
+                        <select name="society" id="society" class="input-brutal" required title="Select a society">
+                            <option value="">Select Society</option>
+                            <option value="computer">Computer Society</option>
+                            <option value="arts">Arts Society</option>
+                            <option value="sports">Sports Society</option>
+                            <option value="literary">Literary Society</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="eventDateTime" class="block mb-2 font-bold mono">Date & Time</label>
+                        <input type="datetime-local" name="eventDateTime" id="eventDateTime" class="input-brutal" required title="Select event date and time">
+                    </div>
+                    <div>
+                        <label for="venue" class="block mb-2 font-bold mono">Venue</label>
+                        <input type="text" name="venue" id="venue" class="input-brutal" required placeholder="Enter event venue">
+                    </div>
+                    <div>
+                        <label for="description" class="block mb-2 font-bold mono">Description</label>
+                        <textarea name="description" id="description" class="input-brutal h-32" required placeholder="Enter event description"></textarea>
+                    </div>
+                    <div>
+                        <label for="eventBanner" class="block mb-2 font-bold mono">Event Banner</label>
+                        <input type="file" name="eventBanner" id="eventBanner" accept="image/*" class="input-brutal" required title="Upload event banner image">
+                    </div>
+                    <button type="submit" class="btn-brutal mono font-bold tracking-wider w-full">
+                        PUBLISH EVENT
+                    </button>
+                </form>
+            </div>
+        `
+
+        const societyCreation = `
+             <div class="bg-white p-6 rounded-lg neu-brutal">
+                <h2 class="text-2xl font-bold mb-6 mono">Create New Society</h2>
+                <form id="societyForm" class="space-y-4">
+                    <div>
+                        <label for="societyName" class="block mb-2 font-bold mono">Society Name</label>
+                        <input type="text" name="societyName" id="societyName" class="input-brutal" required placeholder="Enter the name of the society">
+                    </div>
+                    <div>
+                        <label for="societyHead" class="block mb-2 font-bold mono">Society Head</label>
+                        <input type="text" name="societyHead" id="societyHead" class="input-brutal" required placeholder="Name of the society head">
+                    </div>
+                    <div>
+                        <label for="category" class="block mb-2 font-bold mono">Category</label>
+                        <input type="text" name="category" id="category" class="input-brutal" required placeholder="Specify the category of the society">
+                    </div>
+                    <button type="submit" class="btn-brutal mono font-bold tracking-wider w-full">
+                        PUBLISH EVENT
+                    </button>
+                </form>
+            </div>
+        `
+
+        const manageSocieties = `
+            <button onclick="useblock2()"class="btn-brutal mono font-bold">MANAGE SOCIETIES</button>
+            <button class="btn-brutal mono font-bold">VIEW ANALYTICS</button>
+        `
+
+        const manageEvents = `
+            <button onclick="useblock1()"class="btn-brutal mono font-bold">MANAGE EVENTS</button>
+            <button class="btn-brutal mono font-bold">VIEW ANALYTICS</button>
+        `
+
+        function useblock2() {
+            document.getElementById('mainContent').innerHTML = societyCreation;
+            document.getElementById('quickActions').innerHTML = manageEvents;
+            document.getElementById('eventForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Add society creation logic here
+                alert('Society created successfully!');
+            });
+        }
+        function useblock1() {
+            document.getElementById('mainContent').innerHTML = eventCreation;
+            document.getElementById('quickActions').innerHTML = manageSocieties;
+            document.getElementById('eventForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Add event creation logic here
+                alert('Event created successfully!');
+            });
         }
     </script>
 </body>
