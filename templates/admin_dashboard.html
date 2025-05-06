@@ -111,7 +111,7 @@
             <div id="mainContent">
                 <div class="bg-white p-6 rounded-lg neu-brutal">
                     <h2 class="text-2xl font-bold mb-6 mono">Create New Event</h2>
-                    <form id="eventForm" class="space-y-4">
+                    <form id="eventForm" class="space-y-4" method="POST" action="/admin">
                         <div>
                             <label for="eventTitle" class="block mb-2 font-bold mono">Event Title</label>
                             <input type="text" name="eventTitle" id="eventTitle" class="input-brutal" required placeholder="Enter event title">
@@ -136,15 +136,13 @@
                         </div>
                         <div>
                             <label for="description" class="block mb-2 font-bold mono">Description</label>
-                            <textarea name="description" id="description" class="input-brutal h-32" required placeholder="Enter event description"></textarea>
+                            <textarea name="description" id="description" class="input-brutal h-32" placeholder="Enter event description"></textarea>
                         </div>
                         <div>
                             <label for="eventBanner" class="block mb-2 font-bold mono">Event Banner</label>
-                            <input type="file" name="eventBanner" id="eventBanner" accept="image/*" class="input-brutal" required title="Upload event banner image">
+                            <input type="file" name="eventBanner" id="eventBanner" class="input-brutal" title="Upload event banner image">
                         </div>
-                        <button type="submit" class="btn-brutal mono font-bold tracking-wider w-full">
-                            PUBLISH EVENT
-                        </button>
+                        <input type="submit" name="block1" value="PUBLISH EVENT" class="btn-brutal mono font-bold tracking-wider w-full">
                     </form>
                 </div>
             </div>
@@ -196,20 +194,17 @@
 
     <script>
         document.getElementById('eventForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Add event creation logic here
             alert('Event created successfully!');
         });
 
         function logout() {
-            // Add logout logic here
-            window.location.href = 'index.html';
+            window.location.href = '/logout';
         }
 
         const eventCreation = `
              <div class="bg-white p-6 rounded-lg neu-brutal">
                 <h2 class="text-2xl font-bold mb-6 mono">Create New Event</h2>
-                <form id="eventForm" class="space-y-4">
+                <form id="eventForm" class="space-y-4" method="POST" action="/admin">
                     <div>
                         <label for="eventTitle" class="block mb-2 font-bold mono">Event Title</label>
                         <input type="text" name="eventTitle" id="eventTitle" class="input-brutal" required placeholder="Enter event title">
@@ -234,13 +229,13 @@
                     </div>
                     <div>
                         <label for="description" class="block mb-2 font-bold mono">Description</label>
-                        <textarea name="description" id="description" class="input-brutal h-32" required placeholder="Enter event description"></textarea>
+                        <textarea name="description" id="description" class="input-brutal h-32" placeholder="Enter event description"></textarea>
                     </div>
                     <div>
                         <label for="eventBanner" class="block mb-2 font-bold mono">Event Banner</label>
-                        <input type="file" name="eventBanner" id="eventBanner" accept="image/*" class="input-brutal" required title="Upload event banner image">
+                        <input type="file" name="eventBanner" id="eventBanner" class="input-brutal" title="Upload event banner image">
                     </div>
-                    <button type="submit" class="btn-brutal mono font-bold tracking-wider w-full">
+                    <button type="submit" name="block1" class="btn-brutal mono font-bold tracking-wider w-full">
                         PUBLISH EVENT
                     </button>
                 </form>
@@ -250,7 +245,7 @@
         const societyCreation = `
              <div class="bg-white p-6 rounded-lg neu-brutal">
                 <h2 class="text-2xl font-bold mb-6 mono">Create New Society</h2>
-                <form id="societyForm" class="space-y-4">
+                <form id="societyForm" class="space-y-4" method="POST" action="/admin">
                     <div>
                         <label for="societyName" class="block mb-2 font-bold mono">Society Name</label>
                         <input type="text" name="societyName" id="societyName" class="input-brutal" required placeholder="Enter the name of the society">
@@ -263,7 +258,7 @@
                         <label for="category" class="block mb-2 font-bold mono">Category</label>
                         <input type="text" name="category" id="category" class="input-brutal" required placeholder="Specify the category of the society">
                     </div>
-                    <button type="submit" class="btn-brutal mono font-bold tracking-wider w-full">
+                    <button type="submit" name="block2" class="btn-brutal mono font-bold tracking-wider w-full">
                         PUBLISH EVENT
                     </button>
                 </form>
@@ -284,8 +279,6 @@
             document.getElementById('mainContent').innerHTML = societyCreation;
             document.getElementById('quickActions').innerHTML = manageEvents;
             document.getElementById('eventForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                // Add society creation logic here
                 alert('Society created successfully!');
             });
         }
@@ -293,8 +286,6 @@
             document.getElementById('mainContent').innerHTML = eventCreation;
             document.getElementById('quickActions').innerHTML = manageSocieties;
             document.getElementById('eventForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                // Add event creation logic here
                 alert('Event created successfully!');
             });
         }

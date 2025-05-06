@@ -35,6 +35,26 @@ def home_page():
 
 @app.route('/admin', methods=['POST', 'GET'])
 def admin_page():
+    if request.method == 'POST':
+        with engine.connect() as connection:
+            if "block1" in request.form:
+                title = request.form['eventTitle']
+                society = request.form['society']
+                date = request.form['eventDateTime']
+                venue = request.form['venue']
+                description = request.form['description']
+                eventBanner = request.form['eventBanner']
+                insert_query = text("INSERT INTO event(name, society, date, venue, description, image_path) VALUES(:name, :society, :date, :venue, :description, :image_path);")
+                connection.execute(insert_query, {
+                    "name": title,
+                    "society": society,
+                    "date": date,
+                    "venue": venue,
+                    "description": description,
+                    "image_path": eventBanner
+                })
+                connection.commit()
+
     if "admin_username" in session:
         return render_template('admin_dashboard.html', session=session)
     else:

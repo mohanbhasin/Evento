@@ -76,7 +76,13 @@
         <header class="flex justify-between items-center mb-8">
             <div>
                 <h1 class="text-4xl font-black tracking-wider text-green-900 mono">EVENTO<span class="text-green-600">_</span></h1>
-                <p class="text-green-800">Welcome back, {{ session["username"] }}</p>
+                <p class="text-green-800">
+                    {% if session["admin_username"] is defined %}
+                        Welcome back, {{ session["admin_username"] }}
+                    {% else %}
+                        Welcome back, {{ session["username"] }}
+                    {% endif %}
+                </p>
             </div>
             <button onclick="logout()" class="bg-green-600 text-white px-6 py-3 neu-brutal mono hover:bg-green-700 text-lg font-bold tracking-wider">
                 LOGOUT <span class="font-mono">→</span>
