@@ -193,9 +193,15 @@
     </div>
 
     <script>
-        document.getElementById('eventForm').addEventListener('submit', function(e) {
-            alert('Event created successfully!');
-        });
+        if (document.getElementById('eventForm') !== null)
+            document.getElementById('eventForm').addEventListener('submit', function(e) {
+                alert('Event created successfully!');
+            });
+        
+        if (document.getElementById('societyForm') !== null)
+            document.getElementById('societyForm').addEventListener('submit', function(e) {
+                alert('Society created successfully!');
+            });
 
         function logout() {
             window.location.href = '/logout';
@@ -235,9 +241,7 @@
                         <label for="eventBanner" class="block mb-2 font-bold mono">Event Banner</label>
                         <input type="file" name="eventBanner" id="eventBanner" class="input-brutal" title="Upload event banner image">
                     </div>
-                    <button type="submit" name="block1" class="btn-brutal mono font-bold tracking-wider w-full">
-                        PUBLISH EVENT
-                    </button>
+                    <input type="submit" name="block1" value="PUBLISH EVENT" class="btn-brutal mono font-bold tracking-wider w-full">
                 </form>
             </div>
         `
@@ -258,9 +262,7 @@
                         <label for="category" class="block mb-2 font-bold mono">Category</label>
                         <input type="text" name="category" id="category" class="input-brutal" required placeholder="Specify the category of the society">
                     </div>
-                    <button type="submit" name="block2" class="btn-brutal mono font-bold tracking-wider w-full">
-                        PUBLISH EVENT
-                    </button>
+                    <input type="submit" name="block2" value="ESTABLISH SOCIETY" class="btn-brutal mono font-bold tracking-wider w-full">
                 </form>
             </div>
         `
@@ -276,18 +278,36 @@
         `
 
         function useblock2() {
-            document.getElementById('mainContent').innerHTML = societyCreation;
-            document.getElementById('quickActions').innerHTML = manageEvents;
-            document.getElementById('eventForm').addEventListener('submit', function(e) {
-                alert('Society created successfully!');
-            });
+            document.getElementById('mainContent').innerHTML = societyCreation; // Replace content with society creation form
+            document.getElementById('quickActions').innerHTML = manageEvents; // Update quick actions
+        
+            // Attach event listener after DOM update
+            setTimeout(() => {
+                const societyForm = document.getElementById('societyForm');
+                if (societyForm) {
+                    societyForm.addEventListener('submit', function(e) {
+                        alert('Society created successfully!');
+                    });
+                } else {
+                    console.error("societyForm not found");
+                }
+            }, 0);
         }
         function useblock1() {
-            document.getElementById('mainContent').innerHTML = eventCreation;
-            document.getElementById('quickActions').innerHTML = manageSocieties;
-            document.getElementById('eventForm').addEventListener('submit', function(e) {
-                alert('Event created successfully!');
-            });
+            document.getElementById('mainContent').innerHTML = eventCreation; // Replace content with event creation form
+            document.getElementById('quickActions').innerHTML = manageSocieties; // Update quick actions
+        
+            // Attach event listener after DOM update
+            setTimeout(() => {
+                const eventForm = document.getElementById('eventForm');
+                if (eventForm) {
+                    eventForm.addEventListener('submit', function(e) {
+                        alert('Event created successfully!');
+                    });
+                } else {
+                    console.error("eventForm not found");
+                }
+            }, 0);
         }
     </script>
 </body>

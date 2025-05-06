@@ -54,6 +54,18 @@ def admin_page():
                     "image_path": eventBanner
                 })
                 connection.commit()
+            
+            else:
+                name = request.form['societyName']
+                head = request.form['societyHead']
+                category = request.form['category']
+                insert_query = text("INSERT INTO society(name, society_head, category) VALUES(:name, :head, :category);")
+                connection.execute(insert_query, {
+                    "name": name,
+                    "head": head,
+                    "category": category
+                })
+                connection.commit()
 
     if "admin_username" in session:
         return render_template('admin_dashboard.html', session=session)
