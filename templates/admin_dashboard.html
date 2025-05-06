@@ -120,10 +120,9 @@
                             <label for="society" class="block mb-2 font-bold mono">Society</label>
                             <select name="society" id="society" class="input-brutal" required title="Select a society">
                                 <option value="">Select Society</option>
-                                <option value="computer">Computer Society</option>
-                                <option value="arts">Arts Society</option>
-                                <option value="sports">Sports Society</option>
-                                <option value="literary">Literary Society</option>
+                                {% for society in societies %}
+                                    <option value="{{ society }}"> {{ society }} </option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div>

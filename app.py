@@ -33,6 +33,7 @@ def home_page():
     else:
         return redirect(url_for('login'))
 
+@nocache
 @app.route('/admin', methods=['POST', 'GET'])
 def admin_page():
     if request.method == 'POST':
@@ -68,7 +69,14 @@ def admin_page():
                 connection.commit()
 
     if "admin_username" in session:
-        return render_template('admin_dashboard.html', session=session)
+        societies = []
+        with engine.connect() as connection:
+            query = text("SELECT name from society")
+            result = connection.execute(query)
+            societies = [row[0] for row in result]
+
+
+        return render_template('admin_dashboard.html', session=session, societies=societies)
     else:
         if "username" in session:
             return redirect(url_for('home_page'))
