@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine, text
 from flask import Flask, render_template, request, redirect, url_for, make_response, session
 from functools import wraps
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
@@ -25,11 +26,28 @@ def nocache(view):
         return response
     return no_cache_view
 
+def get_prev_day():
+    today = datetime.now()
+    prev_day = today - timedelta(days=1)
+    return prev_day.strftime('%Y-%m-%d')
+
 @nocache
 @app.route('/')
 def home_page():
     if "username" in session or "admin_username" in session:
-        return render_template('dashboard.html', session=session)
+        with engine.connect() as connection:
+            events_query = text("SELECT event_id FROM event;")
+            society_query = text("SELECT society_id FROM society;")
+            society_result = connection.execute(society_query)
+            events_result = connection.execute(events_query)
+            number_of_events = len(events_result.fetchall())
+            number_of_societies = len(society_result.fetchall())
+            upcoming_events_query = text("SELECT * FROM event WHERE date >= :prev_day ORDER BY date ASC;")
+            prev_day = get_prev_day()
+            upcoming_events_result = connection.execute(upcoming_events_query, {"prev_day": prev_day})
+            upcoming_events = len(upcoming_events_result.fetchall())
+
+        return render_template('dashboard.html', session=session, events=number_of_events, societies=number_of_societies, upcoming_events=upcoming_events)
     else:
         return redirect(url_for('login'))
 
