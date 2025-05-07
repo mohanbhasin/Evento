@@ -58,9 +58,21 @@ def home_page():
                     "venue": row[3]
                 }
                 events_list.append(event)
+            
+            past_events = []
+            past_events_query = text("SELECT name, society, date, venue FROM event WHERE date < :prev_day ORDER BY date DESC;")
+            past_events_query_result = connection.execute(past_events_query, {"prev_day": prev_day})
+            for row in past_events_query_result:
+                event = {
+                    "name": row[0],
+                    "society": row[1],
+                    "date": row[2],
+                    "venue": row[3]
+                }
+                past_events.append(event)
 
         return render_template('dashboard.html', session=session, events=number_of_events, 
-                               societies=number_of_societies, upcoming_events=upcoming_events, events_list=events_list)
+                               societies=number_of_societies, upcoming_events=upcoming_events, events_list=events_list, past_events=past_events)
     else:
         return redirect(url_for('login'))
 

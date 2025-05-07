@@ -106,40 +106,56 @@
         </div>
 
         <!-- Main Content -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- Upcoming Events -->
-            <div class="bg-white p-6 rounded-lg neu-brutal">
-                <h2 class="text-2xl font-bold mb-4 mono">Upcoming Events</h2>
-                <div class="space-y-4">
-                    {% for event in events_list %}
-                        <div class="border-2 border-black p-4 hover:bg-green-50 transition-colors">
-                            <h3 class="font-bold"> {{ event["name"] }} </h3>
-                            <p class="text-gray-600 mono"> {{ event["date"] }} </p> 
-                            <p class="text-gray-600 mono"> {{ event["society"] }} </p>
-                            <p class="text-gray-600 mono"> {{ event["venue"] }} </p>
-                        </div>
-                    {% endfor %}
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Upcoming Events -->
+                <div class="bg-white p-6 rounded-lg neu-brutal">
+                    <h2 class="text-3xl font-extrabold mb-6 mono text-green-900">Upcoming Events</h2>
+                    <div class="space-y-6">
+                        {% for event in events_list %}
+                            <div class="border-4 border-black p-6 rounded-lg hover:bg-green-100 transition-transform transform hover:scale-105">
+                                <h3 class="text-xl font-bold text-green-800 mb-2"> {{ event["name"] }} </h3>
+                                <p class="text-lg text-gray-700 mono mb-1">Date: {{ event["date"] }}</p>
+                                <p class="text-lg text-gray-700 mono mb-1">Society: {{ event["society"] }}</p>
+                                <p class="text-lg text-gray-700 mono">Venue: {{ event["venue"] }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
-
-            <!-- Society Updates -->
-            <div class="bg-white p-6 rounded-lg neu-brutal">
-                <h2 class="text-2xl font-bold mb-4 mono">Society Updates</h2>
-                <div class="space-y-4">
-                    <div class="border-2 border-black p-4 hover:bg-green-50 transition-colors">
-                        <h3 class="font-bold">Computer Society</h3>
-                        <p class="text-gray-600">New workshop series announced</p>
-                        <span class="text-xs text-green-600 mono">2 hours ago</span>
+            
+                <!-- Society Updates -->
+                <div class="bg-white p-6 rounded-lg neu-brutal">
+                    <h2 class="text-3xl font-extrabold mb-6 mono text-green-900">Society Updates</h2>
+                    <div class="space-y-6">
+                        <div class="border-4 border-black p-6 rounded-lg hover:bg-green-100 transition-transform transform hover:scale-105">
+                            <h3 class="text-xl font-bold text-green-800 mb-2">Computer Society</h3>
+                            <p class="text-lg text-gray-700 mono mb-1">New workshop series announced</p>
+                            <span class="text-sm text-green-600 mono">2 hours ago</span>
+                        </div>
+                        <div class="border-4 border-black p-6 rounded-lg hover:bg-green-100 transition-transform transform hover:scale-105">
+                            <h3 class="text-xl font-bold text-green-800 mb-2">Photography Club</h3>
+                            <p class="text-lg text-gray-700 mono mb-1">Exhibition preparations started</p>
+                            <span class="text-sm text-green-600 mono">5 hours ago</span>
+                        </div>
+                        <div class="border-4 border-black p-6 rounded-lg hover:bg-green-100 transition-transform transform hover:scale-105">
+                            <h3 class="text-xl font-bold text-green-800 mb-2">Sports Society</h3>
+                            <p class="text-lg text-gray-700 mono mb-1">Inter-college tournament registration open</p>
+                            <span class="text-sm text-green-600 mono">1 day ago</span>
+                        </div>
                     </div>
-                    <div class="border-2 border-black p-4 hover:bg-green-50 transition-colors">
-                        <h3 class="font-bold">Photography Club</h3>
-                        <p class="text-gray-600">Exhibition preparations started</p>
-                        <span class="text-xs text-green-600 mono">5 hours ago</span>
-                    </div>
-                    <div class="border-2 border-black p-4 hover:bg-green-50 transition-colors">
-                        <h3 class="font-bold">Sports Society</h3>
-                        <p class="text-gray-600">Inter-college tournament registration open</p>
-                        <span class="text-xs text-green-600 mono">1 day ago</span>
+                </div>
+            
+                <!-- Past Events -->
+                <div class="bg-white p-6 rounded-lg neu-brutal">
+                    <h2 class="text-3xl font-extrabold mb-6 mono text-green-900">Past Events</h2>
+                    <div class="space-y-6">
+                        {% for event in past_events %}
+                            <div class="border-4 border-black p-6 rounded-lg hover:bg-gray-100 transition-transform transform hover:scale-105">
+                                <h3 class="text-xl font-bold text-green-800 mb-2"> {{ event["name"] }} </h3>
+                                <p class="text-lg text-gray-700 mono mb-1">Date: {{ event["date"] }}</p>
+                                <p class="text-lg text-gray-700 mono mb-1">Society: {{ event["society"] }}</p>
+                                <p class="text-lg text-gray-700 mono">Venue: {{ event["venue"] }}</p>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
