@@ -47,7 +47,20 @@ def home_page():
             upcoming_events_result = connection.execute(upcoming_events_query, {"prev_day": prev_day})
             upcoming_events = len(upcoming_events_result.fetchall())
 
-        return render_template('dashboard.html', session=session, events=number_of_events, societies=number_of_societies, upcoming_events=upcoming_events)
+            events_list = []
+            all_events_query = text("SELECT name, society, date, venue FROM event WHERE date >= :prev_day ORDER BY date ASC;")
+            all_events_query_result = connection.execute(all_events_query, {"prev_day": prev_day})
+            for row in all_events_query_result:
+                event = {
+                    "name": row[0],
+                    "society": row[1],
+                    "date": row[2],
+                    "venue": row[3]
+                }
+                events_list.append(event)
+
+        return render_template('dashboard.html', session=session, events=number_of_events, 
+                               societies=number_of_societies, upcoming_events=upcoming_events, events_list=events_list)
     else:
         return redirect(url_for('login'))
 
@@ -63,7 +76,7 @@ def admin_page():
                 venue = request.form['venue']
                 description = request.form['description']
                 eventBanner = request.form['eventBanner']
-                insert_query = text("INSERT INTO event(name, society, date, venue, description, image_path) VALUES(:name, :society, :date, :venue, :description, :image_path);")
+                insert_query = text("INSERT INTO event(name, society, date, venue, description, image_path) VALUES(UPPER(:name), UPPER(:society), :date, :venue, :description, :image_path);")
                 connection.execute(insert_query, {
                     "name": title,
                     "society": society,
